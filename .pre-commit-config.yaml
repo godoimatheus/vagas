@@ -1,16 +1,16 @@
 repos:
-- hooks:
-  - id: commitizen
-  - id: commitizen-branch
-    stages:
-    - push
-  repo: https://github.com/commitizen-tools/commitizen
-  rev: 3.5.2
--   repo: local
-    hooks:
-      - id: requirements
-        name: requirements
-        entry: bash -c 'venv/bin/pip3 freeze > requirements.txt; git add requirements.txt'
-        language: system
-        pass_filenames: false
-        stages: [commit]
+  - hooks:
+    - id: commitizen
+    - id: commitizen-branch
+      stages:
+      - push
+    repo: https://github.com/commitizen-tools/commitizen
+    rev: 3.5.2
+  -   repo: local
+      hooks:
+        - id: requirements
+          name: requirements
+          entry: bash -c 'venv/bin/pip3 freeze > requirements.txt; git add requirements.txt'
+          language: system
+          pass_filenames: false
+          stages: [commit]
