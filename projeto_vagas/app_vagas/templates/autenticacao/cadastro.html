@@ -37,27 +37,22 @@
       <div style="text-align: center;" class="container">
         <h1>Cadastre-se</h1>
         <br>
-        Informe seu e-mail
-        <br> 
-        <input name="usuario" class="form-control-sm" type="email">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Endereço de e-mail</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+        <label for="inputPassword5" class="form-label">Crie sua senha</label>
+        <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+            Sua senha deve ter entre 6-12 caracteres, pode-se usar letras e números.
+        </div>
         <br>
         <br>
-        Escolha uma senha
-        <br>
-        <input name="senha" class="form-control-sm" type="password">
-        <br>
-        <br>
-        <fieldset>
-            <legend> Tipo de cadastro? </legend>
-            <div>
-              <input type = "checkbox" id = "candidatos" name = "cadastro" value = "candidatos">
-              <label for = "coding"> Candidatos </label>
-            </div>
-            <div>
-              <input type = "checkbox" id = "Empresas" name = "Cadastro" value = "empresas">
-              <label for = "music"> Empresas </label>
-            </div>
-          </fieldset>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Selecione o tipo de cadastro</option>
+            <option value="1">Candidatos</option>
+            <option value="2">Empresas</option>
+          </select>
         <br>
         <button class="form-control-sm">Finalizar</button>
         <br>
