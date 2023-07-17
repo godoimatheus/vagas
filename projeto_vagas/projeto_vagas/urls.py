@@ -21,5 +21,7 @@ from app_vagas import views
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    path("", views.login, name="login")
+    path("", views.login, name="login"),
+
+    path("cadastro/", views.cadastro, name="cadastro")
 ]
