@@ -5,3 +5,7 @@ from django.shortcuts import render
 
 def login(request):
     return render(request, "autenticacao/login.html")
+
+
+def cadastro(request):
+    return render(request, "autenticacao/cadastro.html")
