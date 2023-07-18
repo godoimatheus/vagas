@@ -7,6 +7,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+def home(request):
+    return render(request, "home.html")
+
 def cadastro(request):
     if request.method == "GET":
         return render(request, "cadastro.html")
