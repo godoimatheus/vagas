@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "app_vagas",
+    "rolepermissions",
+    "empresas",
+    "candidatos"
 ]
 
 MIDDLEWARE = [
@@ -122,3 +125,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+ROLEPERMISSIONS_MODULE = "projeto_vagas.roles"
