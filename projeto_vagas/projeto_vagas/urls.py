@@ -22,4 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("app_vagas.urls")),
     path("", views.home, name="home"),
+    path("empresas/", include("empresas.urls")),
+    path("candidatos/", include("candidatos.urls"))
 ]
