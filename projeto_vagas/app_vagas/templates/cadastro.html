@@ -1,26 +1,36 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Vagas</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vagas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
         <form action="{% url 'cadastro' %}" method="POST"> {% csrf_token %}
-            <input type="text" placeholder="Username..." name="username">
-            <br>
-            <input type="email" placeholder="Email..." name="email">
-            <br>
-            <input type="password" placeholder="Senha..." name="senha">
-            <br>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Selecione o tipo de cadastro</option>
-                <option value="candidatos">Candidatos</option>
-                <option value="empresas">Empresas</option>
-              </select>
-            <input type="submit" value="Cadastrar">
-            <br>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username..." name="username">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email..." name="email">
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" placeholder="Senha..." name="senha">
+            </div>
+            <div class="mb-3">
+                <label for="tipo_cadastro" class="form-label">Selecione o tipo de cadastro</label>
+                <select class="form-select" aria-label="Tipo de cadastro" id="tipo_cadastro" name="tipo_cadastro">
+                    <option selected>Selecione o tipo de cadastro</option>
+                    <option value="candidatos">Candidatos</option>
+                    <option value="empresas">Empresas</option>
+                </select>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Cadastrar">
         </form>
-    </body>
+    </div>
+</body>
 </html>
