@@ -1,9 +1,12 @@
+asgiref==3.7.2
 astroid==2.15.6
 black==23.7.0
 cfgv==3.3.1
 click==8.1.5
 dill==0.3.6
 distlib==0.3.6
+Django==4.2.3
+django-role-permissions==3.2.0
 filelock==3.12.2
 identify==2.5.24
 isort==5.12.0
@@ -17,6 +20,7 @@ platformdirs==3.8.1
 pre-commit==3.3.3
 pylint==2.17.4
 PyYAML==6.0
+sqlparse==0.4.4
 tomli==2.0.1
 tomlkit==0.11.8
 typing_extensions==4.7.1
