@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "app_vagas",
-    "rolepermissions"
+    "rolepermissions",
+    "empresas",
+    "candidatos"
 ]
 
 MIDDLEWARE = [
