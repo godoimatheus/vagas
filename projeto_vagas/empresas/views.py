@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 # from django.contrib.auth.decorators import login_required
 from .models import Vagas
-
+from .forms import FormVagas
 # Create your views here.
 
 
@@ -48,6 +48,7 @@ def vagas(request):
     vagas = Vagas.objects.all()
     return render(request, "empresas/vagas.html", {"vagas": vagas})
 
+
 def criar_vaga(request):
     return render(request, "empresas/criar_vaga.html")
 
@@ -78,4 +79,31 @@ def salvar_vaga(request):
         escolaridade=escolaridade
     )
     vaga.save()
-    return HttpResponse("Vaga salva com sucesso")
+    return redirect("/")
+
+
+def detalhes_vaga(request, vaga_id):
+    vaga = get_object_or_404(Vagas, pk=vaga_id)
+    return render(request, "empresas/detalhes_vaga.html", {"vaga": vaga})
+
+
+def editar_vaga(request, vaga_id):
+    vaga = get_object_or_404(Vagas, pk=vaga_id)
+    form = FormVagas(instance=vaga)
+
+    if request.method == "POST":
+        form = FormVagas(request.POST, instance=vaga)
+
+        if form.is_valid():
+            form.save()
+            return redirect("detalhes_vaga", vaga_id=vaga.id)
+
+    return render(request, "empresas/editar_vaga.html", {"form": form, "vaga": vaga})
+
+
+def deletar_vaga(request):
+    pass
+
+
+def candidatos_vaga(request):
+    pass
