@@ -116,15 +116,19 @@ def editar_vaga(request, vaga_id):
             }
             escolaridade = dict_escolaridade[int(escolaridade_value)]
             vaga.escolaridade = escolaridade
-   
+
             form.save()
             return redirect("detalhes_vaga", vaga_id=vaga.id)
 
     return render(request, "empresas/editar_vaga.html", {"form": form, "vaga": vaga})
 
 
-def deletar_vaga(request):
-    pass
+def deletar_vaga(request, vaga_id):
+    vaga = get_object_or_404(Vagas, pk=vaga_id)
+    if request.method == "POST":
+        vaga.delete()
+        return redirect("vagas")
+    return render(request, "empresas/deletar_vaga.html", {"vaga": vaga})
 
 
 def candidatos_vaga(request):
