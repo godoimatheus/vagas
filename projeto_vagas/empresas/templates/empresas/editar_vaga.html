@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editando {{ vaga.titulo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Editar - {{ vaga.titulo }}</h1>
+    <form action="{% url 'editar_vaga' vaga.id %}" method="POST"> {% csrf_token %}
+        {% if error_message %}
+        <p class="text-danger">{{ error_message }}</p>
+        {% endif %}
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" placeholder="Título da vaga" name="titulo" value="{{ vaga.titulo }}">
+        </div>
+        <div class="mb-3">
+            <label for="salario" class="form-label">Faixa salarial</label>
+            <select class="form-select" aria-label="Faixa salarial" id="salario" name="salario">
+                <option value="1" {% if vaga.salario == 1 %}selected{% endif %}>Até 1000</option>
+                <option value="2" {% if vaga.salario == 2 %}selected{% endif %}>De 1000 a 2000</option>
+                <option value="3" {% if vaga.salario == 3 %}selected{% endif %}>De 2000 a 3000</option>
+                <option value="4" {% if vaga.salario == 4 %}selected{% endif %}>Acima de 4000</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="escolaridade" class="form-label">Escolaridade</label>
+            <select class="form-select" aria-label="Escolaridade" id="escolaridade" name="escolaridade">
+                <option value="1" {% if vaga.escolaridade == 1 %}selected{% endif %}>Ensino fundamental</option>
+                <option value="2" {% if vaga.escolaridade == 2 %}selected{% endif %}>Ensino médio</option>
+                <option value="3" {% if vaga.escolaridade == 3 %}selected{% endif %}>Tecnólogo</option>
+                <option value="4" {% if vaga.escolaridade == 4 %}selected{% endif %}>Ensino Superior</option>
+                <option value="5" {% if vaga.escolaridade == 5 %}selected{% endif %}>Pós / MBA / Mestrado</option>
+                <option value="6" {% if vaga.escolaridade == 6 %}selected{% endif %}>Doutorado</option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Salvar alterações">
+    </form>
+</body>
+</html>
