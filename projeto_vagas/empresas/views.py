@@ -95,6 +95,28 @@ def editar_vaga(request, vaga_id):
         form = FormVagas(request.POST, instance=vaga)
 
         if form.is_valid():
+            salario_value = form.cleaned_data["salario"]
+            dict_salarios = {
+                1: "Até 1000",
+                2: "De 1000 a 2000",
+                3: "De 2000 a 3000",
+                4: "Acima de 4000"
+            }
+            salario = dict_salarios[int(salario_value)]
+            vaga.salario = salario
+
+            escolaridade_value = form.cleaned_data["escolaridade"]
+            dict_escolaridade = {
+                1: "Ensino fundamental",
+                2: "Ensino médio",
+                3: "Tecnólogo",
+                4: "Ensino Superior",
+                5: "Pós / MBA / Mestrado",
+                6: "Doutorado"
+            }
+            escolaridade = dict_escolaridade[int(escolaridade_value)]
+            vaga.escolaridade = escolaridade
+   
             form.save()
             return redirect("detalhes_vaga", vaga_id=vaga.id)
 
