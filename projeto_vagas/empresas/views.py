@@ -131,5 +131,5 @@ def deletar_vaga(request, vaga_id):
     return render(request, "empresas/deletar_vaga.html", {"vaga": vaga})
 
 
-def candidatos_vaga(request):
-    pass
+def candidatos_vaga(request, vaga_id):
+    return render(request, "empresas/candidatos_vaga.html")
