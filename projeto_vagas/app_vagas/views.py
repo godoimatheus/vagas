@@ -1,10 +1,11 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
-
+from empresas.models import Vagas
+from .models import Candidatura
 # Create your views here.
 
 
@@ -48,3 +49,29 @@ def login(request):
 @login_required(login_url="/auth/login/")
 def plataforma():
     return HttpResponse("Plataforma")
+
+
+def vagas_home(request):
+    vagas = Vagas.objects.all()
+    return render(request, "vagas_home.html", {"vagas": vagas})
+
+
+def vagas_detalhes(request, vaga_id):
+    vaga = get_object_or_404(Vagas, pk=vaga_id)
+    return render(request, "vagas_detalhes.html", {"vaga": vaga})
+
+
+@login_required
+def vagas_candidatar(request, vaga_id):
+    vaga = get_object_or_404(Vagas, pk=vaga_id)
+    candidato = request.user
+
+    candidatura_existente = Candidatura.objects.filter(candidato=candidato, vaga=vaga).exists()
+
+    if candidatura_existente:
+        return render(request, "candidatura_existente.html", {"vaga": vaga})
+
+    candidatura = Candidatura(candidato=candidato, vaga=vaga)
+    candidatura.save()
+
+    return render(request, "candidatura_sucesso.html", {"vaga": vaga})
