@@ -1,9 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
-# from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -19,12 +18,12 @@ def cadastro_candidatos(request):
         user = User.objects.filter(username=username).first()
 
         if user:
-            return HttpResponse("Já cadastrado")
+            return redirect("login_candidatos")
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
 
-        return HttpResponse("Usuário cadastrado com sucesso")
+        return redirect("cadastro_candidatos")
 
 
 def login_candidatos(request):
@@ -38,6 +37,6 @@ def login_candidatos(request):
 
         if user:
             login_django(request, user)
-            return HttpResponse("autenticado")
+            return redirect("vagas_home")
         else:
-            return HttpResponse("Email ou senha inválidos")
+            return render(request, "candidatos/login_erro.html")
