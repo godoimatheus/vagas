@@ -6,6 +6,7 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from empresas.models import Vagas
 from .models import Candidatura
+from .forms import CandidaturaForm
 # Create your views here.
 
 
@@ -62,7 +63,7 @@ def vagas_detalhes(request, vaga_id):
 
 
 @login_required
-def vagas_candidatar(request, vaga_id):
+def candidatar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidato = request.user
 
@@ -71,7 +72,15 @@ def vagas_candidatar(request, vaga_id):
     if candidatura_existente:
         return render(request, "candidatura_existente.html", {"vaga": vaga})
 
-    candidatura = Candidatura(candidato=candidato, vaga=vaga)
-    candidatura.save()
+    if request.method == "POST":
+        form = CandidaturaForm(request.POST)
+        if form.is_valid():
+            candidatura = form.save(commit=False)
+            candidatura.candidato = candidato
+            candidatura.vaga = vaga
+            candidatura.save()
+            return render(request, "candidatura_sucesso.html", {"vaga": vaga})
+    else:
+        form = CandidaturaForm()
 
-    return render(request, "candidatura_sucesso.html", {"vaga": vaga})
+    return render(request, "candidatar_vaga.html", {"form": form, "vaga": vaga})
