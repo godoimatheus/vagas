@@ -1,1 +1,18 @@
-homepage
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagas de empregos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body> 
+    <div class="container mt-4">
+        <h1>Vagas de Empregos</h1>
+        <p>Para ter acesso às vagas, realize o login:</p>
+        <a href="{% url 'login_candidatos' %}" class="btn btn-primary">Login como candidato</a>
+        <a href="{% url 'login_empresas' %}" class="btn btn-primary">Login como empresa</a>
+    </div>
+</body>
+</html>
+    
