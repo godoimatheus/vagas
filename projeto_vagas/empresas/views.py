@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from .models import Vagas
 from .forms import FormVagas
 from app_vagas.models import Candidatura
@@ -22,12 +22,12 @@ def cadastro_empresas(request):
         user = User.objects.filter(username=username).first()
 
         if user:
-            return HttpResponse("Já cadastrado")
+            return redirect("login_empresas")
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
 
-        return HttpResponse("Usuário cadastrado com sucesso")
+        return redirect("login_empresas")
 
 
 def login_empresas(request):
@@ -41,20 +41,23 @@ def login_empresas(request):
 
         if user:
             login_django(request, user)
-            return HttpResponse("autenticado")
+            return redirect("vagas")
         else:
-            return HttpResponse("Email ou senha inválidos")
+            return render(request, "empresas/login_erro.html")
 
 
+@login_required(login_url="/empresas/login")
 def vagas(request):
     vagas = Vagas.objects.all()
     return render(request, "empresas/vagas.html", {"vagas": vagas})
 
 
+@login_required(login_url="/empresas/login")
 def criar_vaga(request):
     return render(request, "empresas/criar_vaga.html")
 
 
+@login_required(login_url="/empresas/login")
 def salvar_vaga(request):
     titulo = request.POST.get("titulo")
     salario_value = request.POST.get("salario")
@@ -81,14 +84,16 @@ def salvar_vaga(request):
         escolaridade=escolaridade
     )
     vaga.save()
-    return redirect("/")
+    return redirect("detalhes_vagas")
 
 
+@login_required(login_url="/empresas/login")
 def detalhes_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     return render(request, "empresas/detalhes_vaga.html", {"vaga": vaga})
 
 
+@login_required(login_url="/empresas/login")
 def editar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     form = FormVagas(instance=vaga)
@@ -125,6 +130,7 @@ def editar_vaga(request, vaga_id):
     return render(request, "empresas/editar_vaga.html", {"form": form, "vaga": vaga})
 
 
+@login_required(login_url="/empresas/login")
 def deletar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     if request.method == "POST":
@@ -133,6 +139,7 @@ def deletar_vaga(request, vaga_id):
     return render(request, "empresas/deletar_vaga.html", {"vaga": vaga})
 
 
+@login_required(login_url="/empresas/login")
 def candidatos_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidaturas = Candidatura.objects.filter(vaga=vaga)
