@@ -6,6 +6,8 @@ from django.contrib.auth import login as login_django
 # from django.contrib.auth.decorators import login_required
 from .models import Vagas
 from .forms import FormVagas
+from app_vagas.models import Candidatura
+
 # Create your views here.
 
 
@@ -132,4 +134,6 @@ def deletar_vaga(request, vaga_id):
 
 
 def candidatos_vaga(request, vaga_id):
-    return render(request, "empresas/candidatos_vaga.html")
+    vaga = get_object_or_404(Vagas, pk=vaga_id)
+    candidaturas = Candidatura.objects.filter(vaga=vaga)
+    return render(request, "empresas/candidatos_vaga.html", {"vaga": vaga, "candidaturas": candidaturas})
