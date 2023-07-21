@@ -8,5 +8,5 @@ urlpatterns = [
     path("plataforma/", views.plataforma, name="plataforma"),
     path("vagas/", views.vagas_home, name="vagas_home"),
     path("vagas/<int:vaga_id>", views.vagas_detalhes, name="vagas_detalhes"),
-    path("vagas/<int:vaga_id>/candidatar", views.vagas_candidatar, name="vagas_candidatar"),
+    path("vagas/<int:vaga_id>/candidatar", views.candidatar_vaga, name="candidatar_vaga"),
 ]
