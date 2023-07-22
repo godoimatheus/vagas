@@ -30,43 +30,43 @@ Antes de rodar o projeto, certifique-se de ter os seguintes pré-requisitos inst
 
 ## Instalação e configuração
 
-- Clone o repositório para o seu computador:
+Clone o repositório para o seu computador:
 
 `git clone https://github.com/godoimatheus/vagas.git`
 
-- Crie um ambiente virtual (opcional, mas recomendado)
+Crie um ambiente virtual (opcional, mas recomendado):
 
 `python -m venv venv`
 
-- Ative o ambiente virtual (opcional)
+Ative o ambiente virtual (opcional):
 
-  - Windows
+- Windows
 
   `venv\Scripts\activate`
 
-  - macOS/Linux
+- macOS/Linux
 
   `source venv/bin/activate`
 
-- Instale as dependências
+Instale as dependências:
 
 `pip install -r requirements.txt`
 
-- Configure o banco de dados
+Configure o banco de dados:
 
 >O projeto está configurado para usar o banco de dados SQLite por padrão. Se desejar usar outro banco de dados (por exemplo, MySQL ou PostgreSQL), modifique as configurações no arquivo **settings.py**.
 
-- Realize as migrações
+Realize as migrações:
 
 > Certifique que esteje na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos.
 
 `python manage.py migrate`
 
-- Crie um superusuário (administrador)
+Crie um superusuário (administrador):
 
 `python manage.py createsuperuser`
 
-- Rode o servidor
+Rode o servidor:
 
 `python manage.py runserver`
 
