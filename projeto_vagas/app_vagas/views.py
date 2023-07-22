@@ -36,7 +36,9 @@ def candidatar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidato = request.user
 
-    candidatura_existente = Candidatura.objects.filter(candidato=candidato, vaga=vaga).exists()
+    candidatura_existente = Candidatura.objects.filter(
+        candidato=candidato, vaga=vaga
+    ).exists()
 
     if candidatura_existente:
         return render(request, "candidatura_existente.html", {"vaga": vaga})

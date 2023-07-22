@@ -13,9 +13,9 @@ def cadastro_candidatos(request):
     if request.method == "GET":
         return render(request, "candidatos/cadastro.html")
     else:
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        senha = request.POST.get("senha")
 
         user = User.objects.filter(username=username).first()
 
@@ -32,8 +32,8 @@ def login_candidatos(request):
     if request.method == "GET":
         return render(request, "candidatos/login.html")
     else:
-        username = request.POST.get('username')
-        senha = request.POST.get('senha')
+        username = request.POST.get("username")
+        senha = request.POST.get("senha")
 
         user = authenticate(username=username, password=senha)
 

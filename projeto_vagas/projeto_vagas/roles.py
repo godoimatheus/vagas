@@ -6,11 +6,9 @@ class Empresa(AbstractUserRole):
         "criar_vagas": True,
         "editar_vagas": True,
         "excluir_vagas": True,
-        "ver_candidatos": True
+        "ver_candidatos": True,
     }
 
 
 class Candidato(AbstractUserRole):
-    available_permissions = {
-        "candidatar_vagas": True
-    }
+    available_permissions = {"candidatar_vagas": True}

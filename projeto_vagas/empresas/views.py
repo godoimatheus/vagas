@@ -17,9 +17,9 @@ def cadastro_empresas(request):
     if request.method == "GET":
         return render(request, "empresas/cadastro.html")
     else:
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
+        username = request.POST.get("username")
+        email = request.POST.get("email")
+        senha = request.POST.get("senha")
 
         user = User.objects.filter(username=username).first()
 
@@ -36,8 +36,8 @@ def login_empresas(request):
     if request.method == "GET":
         return render(request, "empresas/login.html")
     else:
-        username = request.POST.get('username')
-        senha = request.POST.get('senha')
+        username = request.POST.get("username")
+        senha = request.POST.get("senha")
 
         user = authenticate(username=username, password=senha)
 
@@ -75,7 +75,7 @@ def salvar_vaga(request):
         1: "Até 1000",
         2: "De 1000 a 2000",
         3: "De 2000 a 3000",
-        4: "Acima de 4000"
+        4: "Acima de 4000",
     }
     salario = dict_salarios[int(salario_value)]
     escolaridade_value = request.POST.get("escolaridade")
@@ -85,14 +85,10 @@ def salvar_vaga(request):
         3: "Tecnólogo",
         4: "Ensino Superior",
         5: "Pós / MBA / Mestrado",
-        6: "Doutorado"
+        6: "Doutorado",
     }
     escolaridade = dict_escolaridade[int(escolaridade_value)]
-    vaga = Vagas(
-        titulo=titulo,
-        salario=salario,
-        escolaridade=escolaridade
-    )
+    vaga = Vagas(titulo=titulo, salario=salario, escolaridade=escolaridade)
     vaga.save()
     return redirect("detalhes_vagas")
 
@@ -119,7 +115,7 @@ def editar_vaga(request, vaga_id):
                 1: "Até 1000",
                 2: "De 1000 a 2000",
                 3: "De 2000 a 3000",
-                4: "Acima de 4000"
+                4: "Acima de 4000",
             }
             salario = dict_salarios[int(salario_value)]
             vaga.salario = salario
@@ -131,7 +127,7 @@ def editar_vaga(request, vaga_id):
                 3: "Tecnólogo",
                 4: "Ensino Superior",
                 5: "Pós / MBA / Mestrado",
-                6: "Doutorado"
+                6: "Doutorado",
             }
             escolaridade = dict_escolaridade[int(escolaridade_value)]
             vaga.escolaridade = escolaridade
@@ -157,4 +153,8 @@ def deletar_vaga(request, vaga_id):
 def candidatos_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidaturas = Candidatura.objects.filter(vaga=vaga)
-    return render(request, "empresas/candidatos_vaga.html", {"vaga": vaga, "candidaturas": candidaturas})
+    return render(
+        request,
+        "empresas/candidatos_vaga.html",
+        {"vaga": vaga, "candidaturas": candidaturas},
+    )

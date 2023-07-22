@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "app_vagas",
     "empresas",
     "candidatos",
-    "rolepermissions"
+    "rolepermissions",
 ]
 
 MIDDLEWARE = [
