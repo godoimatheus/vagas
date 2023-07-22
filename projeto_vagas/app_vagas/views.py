@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from empresas.models import Vagas
 from .models import Candidatura
 from .forms import CandidaturaForm
+from rolepermissions.decorators import has_role_decorator
 
 # Create your views here.
 
@@ -16,17 +17,21 @@ def home(request):
 
 
 @login_required(login_url="/")
+@has_role_decorator("candidato")
 def vagas_home(request):
     vagas = Vagas.objects.all()
     return render(request, "vagas_home.html", {"vagas": vagas})
 
+
 @login_required(login_url="/")
+@has_role_decorator("candidato")
 def vagas_detalhes(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     return render(request, "vagas_detalhes.html", {"vaga": vaga})
 
 
 @login_required(login_url="/")
+@has_role_decorator("candidato")
 def candidatar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidato = request.user

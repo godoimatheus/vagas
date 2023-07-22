@@ -3,6 +3,8 @@ from django.http.response import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
+from rolepermissions.roles import assign_role
+from rolepermissions.decorators import has_role_decorator
 
 # Create your views here.
 
@@ -22,8 +24,8 @@ def cadastro_candidatos(request):
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
-
-        return redirect("cadastro_candidatos")
+        assign_role(user, "candidato")
+        return redirect("login_candidatos")
 
 
 def login_candidatos(request):

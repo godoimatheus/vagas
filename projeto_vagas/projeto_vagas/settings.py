@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "app_vagas",
     "empresas",
-    "candidatos"
+    "candidatos",
+    "rolepermissions"
 ]
 
 MIDDLEWARE = [
