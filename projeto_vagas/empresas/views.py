@@ -85,7 +85,7 @@ def salvar_vaga(request):
     escolaridade = dict_escolaridade[int(escolaridade_value)]
     vaga = Vagas(titulo=titulo, salario=salario, escolaridade=escolaridade)
     vaga.save()
-    return redirect("detalhes_vagas")
+    return redirect("vagas")
 
 
 @login_required(login_url="/empresas/login")
