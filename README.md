@@ -46,10 +46,13 @@ Antes de rodar o projeto, certifique-se de ter os seguintes pré-requisitos inst
 `pip install -r requirements.txt`
 
 - Configure o banco de dados
-O projeto está configurado para usar o banco de dados SQLite por padrão. Se desejar usar outro banco de dados (por exemplo, MySQL ou PostgreSQL), modifique as configurações no arquivo **settings.py**.
+
+>O projeto está configurado para usar o banco de dados SQLite por padrão. Se desejar usar outro banco de dados (por exemplo, MySQL ou PostgreSQL), modifique as configurações no arquivo **settings.py**.
 
 - Realize as migrações
-Certifique que esteje na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos.
+
+> Certifique que esteje na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos.
+
 `python manage.py migrate`
 
 - Crie um superusuário (administrador)
