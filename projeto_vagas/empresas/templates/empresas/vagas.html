@@ -9,7 +9,11 @@
 <body>
     <div class="container mt-4">
         <h1 class="mb-3">Lista de Vagas de Emprego</h1>
-        <a href="{% url 'criar_vaga' %}" class="btn btn-primary mb-3">Nova vaga</a>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'criar_vaga' %}" class="btn btn-primary">Nova vaga</a>
+            <a href="{% url 'logout_view' %}" class="btn btn-danger">Logout</a>
+        </div>        
+        <br>
         <ul class="list-group">
             {% for vaga in vagas %}
                 <li class="list-group-item">

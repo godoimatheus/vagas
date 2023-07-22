@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from .models import Vagas
@@ -32,7 +32,6 @@ def cadastro_empresas(request):
         return redirect("login_empresas")
 
 
-@has_role_decorator("empresa")
 def login_empresas(request):
     if request.method == "GET":
         return render(request, "empresas/login.html")
@@ -47,6 +46,11 @@ def login_empresas(request):
             return redirect("vagas")
         else:
             return render(request, "empresas/login_erro.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")
 
 
 @login_required(login_url="/empresas/login")

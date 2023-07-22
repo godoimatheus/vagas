@@ -8,6 +8,10 @@
 </head>
 <body>
     <div class="container mt-4">
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'logout_view' %}" class="btn btn-danger">Logout</a>
+        </div>     
+        <br>
         <h1 class="mb-3">Lista de Vagas de Emprego</h1>
         <ul class="list-group">
             {% for vaga in vagas %}
