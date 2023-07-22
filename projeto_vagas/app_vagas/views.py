@@ -1,17 +1,13 @@
-from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
+from rolepermissions.decorators import has_role_decorator
 from empresas.models import Vagas
 from .models import Candidatura
 from .forms import CandidaturaForm
-from rolepermissions.decorators import has_role_decorator
 
+
+# pylint: disable=E1101
 # Create your views here.
-
-
 def home(request):
     return render(request, "home.html")
 
