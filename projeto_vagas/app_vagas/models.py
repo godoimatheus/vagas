@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from empresas.models import Vagas
 
 
+# pylint: disable=E1101
 class Candidatura(models.Model):
     CANDIDATURA_CHOICES = [
         ("Até 1000", "Até 1000"),
@@ -27,9 +28,15 @@ class Candidatura(models.Model):
 
     candidato = models.ForeignKey(User, on_delete=models.CASCADE)
     vaga = models.ForeignKey(Vagas, on_delete=models.CASCADE)
-    pretensao_salario = models.CharField(max_length=50, choices=CANDIDATURA_CHOICES, default="Até 1000")
-    experiencia = models.CharField(max_length=50, choices=EXPERIENCIA_CHOICES, default='Até 1 ano')
-    ultima_escolaridade = models.CharField(max_length=50, choices=ESCOLARIDADE_CHOICES, default="Ensino fundamental")
+    pretensao_salario = models.CharField(
+        max_length=50, choices=CANDIDATURA_CHOICES, default="Até 1000"
+    )
+    experiencia = models.CharField(
+        max_length=50, choices=EXPERIENCIA_CHOICES, default="Até 1 ano"
+    )
+    ultima_escolaridade = models.CharField(
+        max_length=50, choices=ESCOLARIDADE_CHOICES, default="Ensino fundamental"
+    )
 
     def __str__(self):
         return f"Candidatura de {self.candidato.username} para {self.vaga.titulo}"

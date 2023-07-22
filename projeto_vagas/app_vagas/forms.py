@@ -5,9 +5,9 @@ from .models import Candidatura
 class CandidaturaForm(forms.ModelForm):
     class Meta:
         model = Candidatura
-        fields = ['pretensao_salario', 'experiencia', 'ultima_escolaridade']
+        fields = ["pretensao_salario", "experiencia", "ultima_escolaridade"]
         labels = {
-            'pretensao_salario': 'Pretensão Salarial',
-            'experiencia': 'Experiência',
-            'ultima_escolaridade': 'Última Escolaridade',
+            "pretensao_salario": "Pretensão Salarial",
+            "experiencia": "Experiência",
+            "ultima_escolaridade": "Última Escolaridade",
         }
