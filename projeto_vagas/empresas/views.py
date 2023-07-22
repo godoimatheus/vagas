@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Vagas
 from .forms import FormVagas
 from app_vagas.models import Candidatura
+from rolepermissions.roles import assign_role
+from rolepermissions.decorators import has_role_decorator
 
 # Create your views here.
 
@@ -26,10 +28,11 @@ def cadastro_empresas(request):
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
-
+        assign_role(user, "empresa")
         return redirect("login_empresas")
 
 
+@has_role_decorator("empresa")
 def login_empresas(request):
     if request.method == "GET":
         return render(request, "empresas/login.html")
@@ -47,17 +50,20 @@ def login_empresas(request):
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def vagas(request):
     vagas = Vagas.objects.all()
     return render(request, "empresas/vagas.html", {"vagas": vagas})
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def criar_vaga(request):
     return render(request, "empresas/criar_vaga.html")
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def salvar_vaga(request):
     titulo = request.POST.get("titulo")
     salario_value = request.POST.get("salario")
@@ -88,12 +94,14 @@ def salvar_vaga(request):
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def detalhes_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     return render(request, "empresas/detalhes_vaga.html", {"vaga": vaga})
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def editar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     form = FormVagas(instance=vaga)
@@ -131,6 +139,7 @@ def editar_vaga(request, vaga_id):
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def deletar_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     if request.method == "POST":
@@ -140,6 +149,7 @@ def deletar_vaga(request, vaga_id):
 
 
 @login_required(login_url="/empresas/login")
+@has_role_decorator("empresa")
 def candidatos_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidaturas = Candidatura.objects.filter(vaga=vaga)
