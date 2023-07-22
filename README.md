@@ -31,18 +31,25 @@ Antes de rodar o projeto, certifique-se de ter os seguintes pré-requisitos inst
 ## Instalação e configuração
 
 - Clone o repositório para o seu computador:
+
 `git clone https://github.com/godoimatheus/vagas.git`
 
 - Crie um ambiente virtual (opcional, mas recomendado)
+
 `python -m venv venv`
 
 - Ative o ambiente virtual (opcional)
+
   - Windows
+
   `venv\Scripts\activate`
+
   - macOS/Linux
+
   `source venv/bin/activate`
 
 - Instale as dependências
+
 `pip install -r requirements.txt`
 
 - Configure o banco de dados
@@ -56,9 +63,11 @@ Antes de rodar o projeto, certifique-se de ter os seguintes pré-requisitos inst
 `python manage.py migrate`
 
 - Crie um superusuário (administrador)
+
 `python manage.py createsuperuser`
 
 - Rode o servidor
+
 `python manage.py runserver`
 
 O site estará disponível em http://localhost:8000/.
