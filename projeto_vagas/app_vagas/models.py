@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from empresas.models import Vagas
 
 
+# pylint: disable=E1101
 class Candidatura(models.Model):
     CANDIDATURA_CHOICES = [
         ("Até 1000", "Até 1000"),
