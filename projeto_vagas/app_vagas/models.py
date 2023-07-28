@@ -37,6 +37,7 @@ class Candidatura(models.Model):
     ultima_escolaridade = models.CharField(
         max_length=50, choices=ESCOLARIDADE_CHOICES, default="Ensino fundamental"
     )
+    pontuacao = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Candidatura de {self.candidato.username} para {self.vaga.titulo}"
