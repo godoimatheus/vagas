@@ -10,8 +10,8 @@
     <div class="container mt-5">
         <form action="{% url 'cadastro_empresas' %}" method="POST"> {% csrf_token %}
             <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Username..." name="username">
+                <label for="username" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="username" placeholder="Nome..." name="username">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
