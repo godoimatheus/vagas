@@ -51,7 +51,7 @@ def logout_view(request):
 @login_required(login_url="/empresas/login")
 @has_role_decorator("empresa")
 def todas_vagas(request):
-    vagas = Vagas.objects.all()
+    vagas = Vagas.objects.filter(empresa=request.user)
     return render(request, "empresas/vagas.html", {"vagas": vagas})
 
 
@@ -64,6 +64,7 @@ def criar_vaga(request):
 @login_required(login_url="/empresas/login")
 @has_role_decorator("empresa")
 def salvar_vaga(request):
+    empresa = request.user
     titulo = request.POST.get("titulo")
     salario_value = request.POST.get("salario")
     dict_salarios = {
@@ -83,7 +84,9 @@ def salvar_vaga(request):
         6: "Doutorado",
     }
     escolaridade = dict_escolaridade[int(escolaridade_value)]
-    vaga = Vagas(titulo=titulo, salario=salario, escolaridade=escolaridade)
+    vaga = Vagas(
+        empresa=empresa, titulo=titulo, salario=salario, escolaridade=escolaridade
+    )
     vaga.save()
     return redirect("vagas")
 
