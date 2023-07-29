@@ -17,6 +17,7 @@
             {% for vaga in vagas %}
                 <li class="list-group-item">
                     <a href="{{vaga.id}}"><h4>{{ vaga.titulo }}</h4></a>
+                    <p>Empresa: {{vaga.empresa }}</p>
                     <p>Salário: {{ vaga.salario }}</p>
                     <p>Escolaridade: {{ vaga.escolaridade }}</p>
                 </li>
