@@ -148,6 +148,25 @@ def deletar_vaga(request, vaga_id):
 def candidatos_vaga(request, vaga_id):
     vaga = get_object_or_404(Vagas, pk=vaga_id)
     candidaturas = Candidatura.objects.filter(vaga=vaga)
+    dict_escolaridade = {
+        "Ensino fundamental": 1,
+        "Ensino médio": 2,
+        "Tecnólogo": 3,
+        "Ensino Superior": 4,
+        "Pós / MBA / Mestrado": 5,
+        "Doutorado": 6,
+    }
+    for candidatura in candidaturas:
+        pontuacao = 0
+        if candidatura.pretensao_salario == vaga.salario:
+            pontuacao += 1
+        escolaridade_vaga = dict_escolaridade[vaga.escolaridade]
+        escolaridade_candidato = dict_escolaridade[candidatura.ultima_escolaridade]
+        if escolaridade_candidato >= escolaridade_vaga:
+            pontuacao += 1
+        candidatura.pontuacao = pontuacao
+        candidatura.save()
+
     return render(
         request,
         "empresas/candidatos_vaga.html",
