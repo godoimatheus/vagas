@@ -25,7 +25,8 @@ def cadastro_candidatos(request):
 
     if user:
         return redirect("login_candidatos")
-
+    if not (username and email and senha):
+        return redirect("cadastro_candidatos")
     user = User.objects.create_user(username=username, email=email, password=senha)
     user.save()
     assign_role(user, "candidato")

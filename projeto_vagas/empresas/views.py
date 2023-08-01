@@ -23,7 +23,8 @@ def cadastro_empresas(request):
 
     if user:
         return redirect("login_empresas")
-
+    if not (username and email and senha):
+        return redirect("cadastro_empresas")
     user = User.objects.create_user(username=username, email=email, password=senha)
     user.save()
     assign_role(user, "empresa")
