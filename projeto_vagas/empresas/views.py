@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
-from app_vagas.models import Candidatura
+from candidatos.models import Candidatura
 from rolepermissions.roles import assign_role
 from rolepermissions.decorators import has_role_decorator
 from .models import Vagas
