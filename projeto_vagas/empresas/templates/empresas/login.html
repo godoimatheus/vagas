@@ -3,7 +3,11 @@
 {% block title %}Login empresas{% endblock title %}
 
 {% block content %}
-
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-md">
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+        </div>
+    </nav>
     <div class="container mt-5">
         <h1>Login - Empresas</h1>
         <form action="{% url 'login_empresas' %}" method="POST"> {% csrf_token %}
