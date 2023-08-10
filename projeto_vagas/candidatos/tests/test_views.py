@@ -73,7 +73,7 @@ class CandidatosViewsTest(TestCase):
             salario="Até 1000",
             escolaridade="Ensino fundamental",
         )
-        self.client.login(username=self.username, password=self.password)
+        self.client.login(username=self.candidato.username, password=self.password)
         response = self.client.get(reverse("vagas_detalhes", args=[vaga.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "candidatos/vagas_detalhes.html")
