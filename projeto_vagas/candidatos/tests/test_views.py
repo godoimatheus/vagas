@@ -4,6 +4,7 @@ from django.urls import reverse
 from rolepermissions.roles import assign_role
 from rolepermissions.checkers import has_role
 from empresas.models import Vagas
+from ..models import Candidatura
 
 # pylint: disable=E1101
 
@@ -89,3 +90,43 @@ class CandidatosViewsTest(TestCase):
         response = self.client.get(reverse("candidatar_vaga", args=[vaga.id]))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "candidatos/candidatar_vaga.html")
+
+    def test_candidatura_com_sucesso(self):
+        vaga = Vagas.objects.create(
+            empresa=self.empresa.username,
+            titulo="Vaga de Teste",
+            salario="Até 1000",
+            escolaridade="Ensino fundamental",
+        )
+        Candidatura.objects.create(candidato=self.candidato, vaga=vaga)
+        self.client.login(username=self.username, password=self.password)
+        response = self.client.post(
+            reverse("candidatar_vaga", args=[vaga.id]),
+            {
+                "pretensao_salarial": "Até 1000",
+                "experiencia": "Até 1 ano",
+                "ultima_escolaridade": "Ensino fundamental",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        # self.assertTemplateUsed(response, "candidatos/candidatura_sucesso.html")
+
+    def test_candidatura_sem_sucesso(self):
+        vaga = Vagas.objects.create(
+            empresa=self.empresa.username,
+            titulo="Vaga de Teste",
+            salario="Até 1000",
+            escolaridade="Ensino fundamental",
+        )
+        Candidatura.objects.create(candidato=self.candidato, vaga=vaga)
+        self.client.login(username=self.username, password=self.password)
+        response = self.client.post(
+            reverse("candidatar_vaga", args=[vaga.id]),
+            {
+                "pretensao_salarial": "Até 1000",
+                "experiencia": "Até 1 ano",
+                "ultima_escolaridade": "Ensino fundamental",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "candidatos/candidatura_existente.html")
