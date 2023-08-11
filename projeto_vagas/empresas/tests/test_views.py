@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from rolepermissions.roles import assign_role
+from rolepermissions.checkers import has_role
 
 
 class EmpresasViewTest(TestCase):
@@ -57,3 +58,13 @@ class EmpresasViewTest(TestCase):
         )
         response = self.client.get(reverse("logout_view"))
         self.assertRedirects(response, reverse("home"))
+
+    def test_se_usuario_tem_permissao_de_empresa(self):
+        response = self.client.get(reverse("vagas"))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(has_role(self.empresa, "empresa"))
+
+    def test_se_usuario_nao_tem_permissao_de_empresa(self):
+        response = self.client.get(reverse("vagas"))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(has_role(self.empresa, "candidato"))
