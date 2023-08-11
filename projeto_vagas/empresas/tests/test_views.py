@@ -50,3 +50,10 @@ class EmpresasViewTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "empresas/login_erro.html")
+
+    def test_logout_view(self):
+        self.assertTrue(
+            self.client.login(username=self.username, password=self.password)
+        )
+        response = self.client.get(reverse("logout_view"))
+        self.assertRedirects(response, reverse("home"))
