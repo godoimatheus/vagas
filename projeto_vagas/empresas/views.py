@@ -9,15 +9,15 @@ from rolepermissions.decorators import has_role_decorator
 from .models import Vagas
 from .forms import FormVagas
 
-
 # pylint: disable=E1101
-# Create your views here.
+
+
 def cadastro_empresas(request):
     if request.method == "GET":
         return render(request, "empresas/cadastro.html")
     username = request.POST.get("username")
     email = request.POST.get("email")
-    senha = request.POST.get("senha")
+    senha = request.POST.get("password")
 
     user = User.objects.filter(username=username).first()
 
@@ -35,7 +35,7 @@ def login_empresas(request):
     if request.method == "GET":
         return render(request, "empresas/login.html")
     username = request.POST.get("username")
-    senha = request.POST.get("senha")
+    senha = request.POST.get("password")
     user = authenticate(username=username, password=senha)
 
     if user:
