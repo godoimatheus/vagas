@@ -58,7 +58,7 @@ Configure o banco de dados:
 
 Realize as migrações:
 
-> Certifique que esteje na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos.
+> Certifique-se que esteja na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos.
 
 `python manage.py migrate`
 
