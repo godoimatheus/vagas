@@ -58,7 +58,7 @@ Configure o banco de dados:
 
 Realize as migrações:
 
-> Certifique que esteje na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos.
+> Certifique-se que esteja na pasta que contenha o arquivo **manage.py** antes de realizar os seguintes comandos. Usando o comando `ls` no terminal podemos ver os arquivos do diretório atual, para acessar a pasta onde o arquivo **manage.py** se localiza, basta usar `cd projeto_vagas`, se quiser ter certeza de que está no diretório correto pode-se usar novamente o comando `ls`.
 
 `python manage.py migrate`
 

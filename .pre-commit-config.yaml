@@ -1,14 +1,14 @@
 repos:
   - hooks:
-    - id: commitizen
-    - id: commitizen-branch
-      stages:
-      - push
+      - id: commitizen
+      - id: commitizen-branch
+        stages:
+          - push
     repo: https://github.com/commitizen-tools/commitizen
-    rev: 3.5.3
-  -   repo: https://github.com/ambv/black
-      rev: 23.7.0
-      hooks:
+    rev: 3.6.0
+  - repo: https://github.com/ambv/black
+    rev: 23.7.0
+    hooks:
       - id: black
         language_version: python3.10
         stages: [commit]
@@ -19,10 +19,17 @@ repos:
         entry: pylint
         language: system
         types: [python]
-        args:
-          [
+        args: [
             "-rn", # Only display messages
             "-sn", # Don't display the score
             "--rcfile=.pylintrc", # Link to your config file
             "--load-plugins=pylint.extensions.docparams", # Load an extension
           ]
+  - repo: local
+    hooks:
+      - id: requirements
+        name: requirements
+        entry: bash -c 'venv/bin/pip3 freeze > requirements.txt; git add requirements.txt'
+        language: system
+        pass_filenames: false
+        stages: [commit]

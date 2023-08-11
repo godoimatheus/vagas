@@ -8,3 +8,6 @@ class Vagas(models.Model):
     titulo = models.CharField(max_length=150)
     salario = models.CharField(max_length=50)
     escolaridade = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return f"{self.titulo} - {self.empresa}"
