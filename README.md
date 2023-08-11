@@ -66,6 +66,10 @@ Crie um superusuário (administrador):
 
 `python manage.py createsuperuser`
 
+Para rodar todos os testes:
+
+`python manage.py test`
+
 Rode o servidor:
 
 `python manage.py runserver`
