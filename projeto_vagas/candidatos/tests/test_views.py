@@ -93,27 +93,30 @@ class CandidatosViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "candidatos/candidatar_vaga.html")
 
-    # def test_candidatura_com_sucesso(self):
-    #     vaga = Vagas.objects.create(
-    #         empresa=self.empresa.username,
-    #         titulo="Vaga de Teste",
-    #         salario="Até 1000",
-    #         escolaridade="Ensino fundamental",
-    #     )
-    #     Candidatura.objects.create(candidato=self.candidato, vaga=vaga)
-    #     self.client.login(
-    #         username=self.candidato.username, password=self.candidato.password
-    #     )
-    #     response = self.client.post(
-    #         reverse("candidatar_vaga", args=[vaga.id]),
-    #         {
-    #             "pretensao_salarial": "Até 1000",
-    #             "experiencia": "Até 1 ano",
-    #             "ultima_escolaridade": "Ensino fundamental",
-    #         },
-    #     )
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertEqual(response.url, reverse("candidatura_sucesso", args=[vaga.id]))
+    def test_candidatura_com_sucesso(self):
+        vaga = Vagas.objects.create(
+            empresa=self.empresa.username,
+            titulo="Vaga de Teste",
+            salario="Até 1000",
+            escolaridade="Ensino fundamental",
+        )
+
+        Candidatura.objects.create(candidato=self.candidato, vaga=vaga)
+        self.client.login(
+            username=self.candidato.username, password=self.candidato.password
+        )
+        response = self.client.post(
+            reverse("candidatar_vaga", args=[vaga.id]),
+            {
+                "pretensao_salario": "Até 1000",
+                "experiencia": "Até 1 ano",
+                "ultima_escolaridade": "Ensino fundamental",
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response, "/?next=" + reverse("candidatar_vaga", args=[vaga.id])
+        )
 
     def test_candidatura_sem_sucesso(self):
         vaga = Vagas.objects.create(
