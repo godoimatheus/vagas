@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("app_vagas", "0003_candidatura_pontuacao"),
+        ("home", "0003_candidatura_pontuacao"),
     ]
 
     operations = [
